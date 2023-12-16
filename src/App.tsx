@@ -5,6 +5,7 @@ function App() {
   return (
     <>
       <Button>Button</Button>
+      <Button appearance={'big'}>Button</Button>
     </>
   );
 }
