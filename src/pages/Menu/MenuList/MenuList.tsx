@@ -1,3 +1,4 @@
+import styles from './MenuList.module.scss';
 import { ProductCard } from '@/components/ProductCard';
 import { MenuListProps } from '@/pages/Menu/MenuList/MenuList.props';
 
@@ -5,7 +6,7 @@ export const MenuList = (props: MenuListProps) => {
   const { products } = props;
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {products.map((p) => (
         <ProductCard
           key={p.id}
@@ -17,6 +18,6 @@ export const MenuList = (props: MenuListProps) => {
           image={p.image}
         />
       ))}
-    </>
+    </div>
   );
 };
