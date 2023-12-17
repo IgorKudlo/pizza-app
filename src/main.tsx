@@ -6,6 +6,7 @@ import { Menu } from '@/pages/Menu';
 import { Cart } from '@/pages/Cart';
 import { Error } from '@/pages/Error';
 import { Layout } from '@/layout/Menu';
+import { Product } from '@/pages/Product';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart/>
+      },
+      {
+        path: '/product/:id',
+        element: <Product/>
       }
     ]
   },
