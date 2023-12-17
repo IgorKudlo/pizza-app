@@ -9,8 +9,8 @@ export const Layout = () => {
       <div className={styles['sidebar']}>
         <div className={styles['user']}>
           <img className={styles['avatar']} src="/avatar.png" alt="Аватар пользователя" />
-          <div className={styles['name']}>Антон Ларичев</div>
-          <div className={styles['email']}>alari@ya.ru</div>
+          <div className={styles['name']}>Игорь Кудло</div>
+          <div className={styles['email']}>igoreklida@gmail.com</div>
         </div>
         <div className={styles['menu']}>
           <NavLink
@@ -34,7 +34,7 @@ export const Layout = () => {
           Выход
         </Button>
       </div>
-      <div>
+      <div className={styles['content']}>
         <Outlet />
       </div>
     </div>
