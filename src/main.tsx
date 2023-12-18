@@ -10,11 +10,12 @@ import { Product } from '@/pages/Product';
 import { Auth } from '@/layout/Auth/Auth';
 import { Login } from '@/pages/Login/';
 import { Register } from '@/pages/Register';
+import { RequireAuth } from '@/helpers/RequireAuth';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout/>,
+    element: <RequireAuth><Layout/></RequireAuth>,
     children: [
       {
         path: '/',
