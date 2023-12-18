@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
-import { Product as ProductInterface } from '@/interfaces/product';
+import { ProductInterface as ProductInterface } from '@/interfaces/product.interface';
 import { useCallback, useEffect, useState } from 'react';
 import { PREFIX } from '@/helpers/API';
 

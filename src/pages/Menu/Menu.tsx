@@ -3,20 +3,20 @@ import { Heading } from '@/components/Heading';
 import { Search } from '@/components/Search';
 import { PREFIX } from '@/helpers/API';
 import { useEffect, useState } from 'react';
-import { Product } from '@/interfaces/product';
+import { ProductInterface } from '@/interfaces/product.interface';
 import axios, { AxiosError } from 'axios';
 import { MenuList } from '@/pages/Menu/MenuList';
 
 
 export const Menu = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductInterface[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
 
   const getMenu = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
+      const { data } = await axios.get<ProductInterface[]>(`${PREFIX}/products`);
       setProducts(data);
     } catch (e) {
       if (e instanceof AxiosError) {
