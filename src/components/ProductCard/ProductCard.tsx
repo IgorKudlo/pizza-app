@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ProductCardProps } from './ProductCard.props';
 
 export const ProductCard = (props: ProductCardProps) => {
-  const { id, image, price, rating, title, description } = props;
+  const { id, image, price, rating, name, description } = props;
 
   return (
     <Link to={`/product/${id}`} className={styles['link']}>
@@ -22,7 +22,7 @@ export const ProductCard = (props: ProductCardProps) => {
           </div>
         </div>
         <div className={styles['footer']}>
-          <div className={styles['title']}>{title}</div>
+          <div className={styles['title']}>{name}</div>
           <div className={styles['description']}>{description}</div>
         </div>
       </div>
