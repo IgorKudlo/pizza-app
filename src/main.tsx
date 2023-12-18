@@ -7,6 +7,9 @@ import { Cart } from '@/pages/Cart';
 import { Error } from '@/pages/Error';
 import { Layout } from '@/layout/Menu';
 import { Product } from '@/pages/Product';
+import { Auth } from '@/layout/Auth/Auth';
+import { Login } from '@/pages/Login/';
+import { Register } from '@/pages/Register';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,19 @@ const router = createBrowserRouter([
       {
         path: '/product/:id',
         element: <Product/>
+      }
+    ]
+  },
+  {
+    path: '/auth',
+    element: <Auth />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />
+      }, {
+        path: 'register',
+        element: <Register />
       }
     ]
   },
