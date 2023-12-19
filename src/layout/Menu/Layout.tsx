@@ -2,26 +2,32 @@ import styles from './Layout.module.scss';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { Button } from '@/components/Button';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/store/store';
-import { userActions } from '@/store/user.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/store/store';
+import { getProfile, userActions } from '@/store/user.slice';
+import { useEffect } from 'react';
 
 export const Layout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const profile = useSelector((state: RootState) => state.user.profile);
 
   const logout = () => {
     dispatch(userActions.logout());
     navigate('/auth/login');
   };
 
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   return (
     <div className={styles['layout']}>
       <div className={styles['sidebar']}>
         <div className={styles['user']}>
           <img className={styles['avatar']} src="/avatar.png" alt="Аватар пользователя" />
-          <div className={styles['name']}>Игорь Кудло</div>
-          <div className={styles['email']}>igoreklida@gmail.com</div>
+          <div className={styles['name']}>{profile?.name}</div>
+          <div className={styles['email']}>{profile?.email}</div>
         </div>
         <div className={styles['menu']}>
           <NavLink
