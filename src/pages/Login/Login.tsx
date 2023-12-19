@@ -48,7 +48,7 @@ export const Login = () => {
       <form className={styles['form']} onSubmit={submit}>
         <div className={styles['field']}>
           <label htmlFor="email">Ваш email</label>
-          <Input id="email" name='email' placeholder='a@gmail.com'/>
+          <Input id="email" name='email' placeholder='igoreklida@gmail.com'/>
         </div>
         <div className={styles['field']}>
           <label htmlFor="password">Ваш пароль</label>
