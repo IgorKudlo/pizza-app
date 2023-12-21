@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
+import { Success } from '@/pages/Success';
 import { Menu } from '@/pages/Menu';
 import { Cart } from '@/pages/Cart';
 import { Error } from '@/pages/Error';
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Menu/>
+      },
+      {
+        path: '/success',
+        element: <Success />
       },
       {
         path: '/cart',

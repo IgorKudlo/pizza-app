@@ -1,18 +1,24 @@
 import styles from './Cart.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Heading } from '@/components/Heading/Heading';
-import { RootState } from '@/store/store';
+import { AppDispatch, RootState } from '@/store/store';
 import { CartItem } from '@/components/CartItem';
 import { useEffect, useState } from 'react';
 import { ProductInterface } from '@/interfaces/product.interface';
 import axios from 'axios';
 import { PREFIX } from '@/helpers/API';
+import { Button } from '@/components/Button';
+import { useNavigate } from 'react-router-dom';
+import { cartActions } from '@/store/cart.slice';
 
 const DELIVERY_FEE = 169;
 
 export const Cart = () => {
   const [cartProducts, setCardProducts] = useState<ProductInterface[]>([]);
   const items = useSelector((s: RootState) => s.cart.items);
+  const jwt = useSelector((s: RootState) => s.user.jwt);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const total = items.map(i => {
     const product = cartProducts.find(p => p.id === i.id);
     if (!product) {
@@ -31,6 +37,18 @@ export const Cart = () => {
     setCardProducts(res);
   };
 
+  const checkout = async () => {
+    await axios.post(`${PREFIX}/order`, {
+      products: items
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
+    dispatch(cartActions.clean());
+    navigate('/success');
+  };
+
   useEffect(() => {
     loadAllItems();
   }, [items]);
@@ -45,7 +63,7 @@ export const Cart = () => {
       return <CartItem key={product.id} count={i.count} {...product} />;
     })}
     <div className={styles['line']}>
-      <div className={styles['text']}>Итог</div>
+      <div className={styles['text']}>Итог <span className={styles['total-count']}>({items.length})</span></div>
       <div className={styles['price']}>{total}&nbsp;<span>₽</span></div>
     </div>
     <hr className={styles['hr']}/>
@@ -57,6 +75,9 @@ export const Cart = () => {
     <div className={styles['line']}>
       <div className={styles['text']}>Итог {items.length}</div>
       <div className={styles['price']}>{total + DELIVERY_FEE}&nbsp;<span>₽</span></div>
+      <div className={styles['checkout']}>
+        <Button appearance="big" onClick={checkout}>оформить</Button>
+      </div>
     </div>
   </>;
 };
